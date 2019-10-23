@@ -1,0 +1,30 @@
+// Article end
+
+.articleEnd
+  position: relative
+  display: block
+  padding: 0
+  margin: 0
+  font: normal normal 400 s('1em/%s', px2em($articleParagraph.lineHeight[$pageLayout.default])) s($articleParagraph.fontFamily)
+  color: rgba(0, 0, 0, .64)
+  letter-spacing: normal
+  text-align: center
+  transition: color .48s linear
+
+  for $_layout, $i in $pageLayout.screens
+    @media all and (min-width: getMQWidth($i))
+      line-height: px2em($articleParagraph.lineHeight[$i])
+
+  {$pageRootClassName}_theme_dark &
+    color: rgba(255, 255, 255, .64)
+
+  &::before
+    content: '*\00a0*\00a0*'
+    position: relative
+    display: inline-block
+    font-size: px2em($articleParagraph.fontSize[$pageLayout.default])
+    vertical-align: top
+
+    for $_layout, $i in $pageLayout.screens
+      @media all and (min-width: getMQWidth($i))
+        font-size: px2em($articleParagraph.fontSize[$i])

@@ -1,0 +1,97 @@
+// Article info data
+
+.articleInfo
+  position: relative
+  display: table
+  padding: 0
+  margin: px2em($articleInfo.marginTop[$pageLayout.default]) 0 0 .125em
+  color: $articleInfo.textColor.light
+  transition: color .48s linear
+
+  .{$pageRootClassName}_theme_dark &
+    color: $articleInfo.textColor.dark
+
+  for $_layout, $i in $pageLayout.screens
+    @media all and (min-width: getMQWidth($i))
+      if $i == 0
+        display: block
+      if $i == $pageLayout.default
+        display: table
+      margin-top: px2em($articleInfo.marginTop[$i])
+
+  &__date
+  &__author
+    position: relative
+    display: table-cell
+    padding: 0
+    margin: 0
+    font: normal normal 400 s('1em/%s', px2em($articleInfo.lineHeight[$pageLayout.default])) s($articleInfo.fontFamily)
+
+    for $_layout, $i in $pageLayout.screens
+      @media all and (min-width: getMQWidth($i))
+        if $i == 0
+          display: block
+        else if $i == $pageLayout.default
+          display: table-cell
+        line-height: px2em($articleInfo.lineHeight[$i])
+
+  &__date
+    padding-right: .75em
+    white-space: nowrap
+
+    @media all and (min-width: getMQWidth(0))
+      padding-right: 0
+      white-space: normal
+
+    @media all and (min-width: getMQWidth($pageLayout.default))
+      padding-right: .75em
+      white-space: nowrap
+
+  &__author
+    padding-top: 0
+    padding-left: .75em
+
+    @media all and (min-width: getMQWidth(0))
+      padding-top: .25em
+      padding-left: 0
+
+    @media all and (min-width: getMQWidth($pageLayout.default))
+      padding-top: 0
+      padding-left: .75em
+
+    &::before
+      content: ''
+      position: absolute
+      top: px2em($articleInfo.lineHeight[$pageLayout.default] / 2)
+      left: -.125em
+      z-index: -1
+      display: none
+      width: .25em
+      height: @width
+      padding: 0
+      margin: -.125em 0 0
+      border-radius: 50%
+      background-color: #000
+      opacity: .24
+      transition: background-color .48s linear
+      user-select: none
+      pointer-events: none
+
+      .{$pageRootClassName}_theme_dark &
+        background-color: #fff
+
+      for $_layout, $i in $pageLayout.screens
+        @media all and (min-width: getMQWidth($i))
+          top: px2em($articleInfo.lineHeight[$i] / 2)
+          if $i == $pageLayout.default
+            display: block
+
+  &__label
+    position: relative
+    display: inline-block
+    letter-spacing: .0024em
+    vertical-align: top
+
+    for $_layout, $i in $pageLayout.screens
+      @media all and (min-width: getMQWidth($i))
+        font-size: px2em($articleInfo.fontSize[$i])

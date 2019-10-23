@@ -1,0 +1,129 @@
+// Article figure
+
+.articleFigure
+  position: relative
+  display: block
+  padding: 0
+  margin: px2em($articleParagraph.lineHeight[$pageLayout.default] - 8) 0 0
+
+  for $_layout, $i in $pageLayout.screens
+    @media all and (min-width: getMQWidth($i))
+      margin-top: px2em($articleParagraph.lineHeight[$i] - 8)
+
+  &__picture
+    position: relative
+    display: block
+    padding: 0
+    margin: 0
+    border-radius: px2em($articleFigure.pictureBorderRadius[$pageLayout.default])
+    background: #f0f0f0
+    background: rgba(255, 255, 255, 0) linear-gradient(45deg, rgba(0, 255, 255, .4) 0%, rgba(0, 255, 0, .2) 100%) center no-repeat scroll
+    overflow: hidden
+    transition: opacity .48s linear
+
+    for $_layout, $i in $pageLayout.screens
+      @media all and (min-width: getMQWidth($i))
+        border-radius: px2em($articleFigure.pictureBorderRadius[$i])
+
+    .{$pageRootClassName}_theme_dark &
+      opacity: .64
+
+      &:hover
+      &:focus
+        opacity: 1
+
+    &_state_loading::after
+      content: ''
+      position: absolute
+      top: 0
+      left: -200%
+      // z-index: -1
+      display: block
+      width: 200%
+      padding-top: 25%
+      background: rgba(0, 0, 0, 0) linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, .4) 50%, rgba(255, 255, 255, 0) 100%) left top repeat scroll
+      background-size: 100%
+      transform: scale(2) translate(0%, 0%) rotate(135deg)
+      animation: loadingFigureImage 2s linear 0s infinite
+
+    &::before
+      content: ''
+      position: relative
+      top: 0
+      left: 0
+      // z-index: -1
+      display: none
+      padding: 25% 0
+
+    &_state_loading::before
+    &_state_error::before
+      display: block
+
+    &_state_error
+      opacity: .4
+
+      &::before
+        background: transparent url(../img/icons/x-octagon.svg) center no-repeat scroll
+        background-size: px2em(48)
+
+    &_size_wide
+      border-radius: 0
+      margin: 0 px2em(-1 * ($pageLayout.marginSafe[$pageLayout.default] + $pageLayout.marginPage[$pageLayout.default]))
+
+      for $_layout, $i in $pageLayout.screens
+        @media all and (min-width: getMQWidth($i))
+          margin: 0 px2em(-1 * ($pageLayout.marginSafe[$i] + $pageLayout.marginPage[$i]))
+
+  &__image
+  &__caption
+    position: relative
+    display: block
+    padding: 0
+    font: normal normal 400 s('1em/%s', px2em($articleFigure.lineHeight[$pageLayout.default])) s($articleFigure.fontFamily)
+    color: $articleFigure.textColor.light
+    letter-spacing: .0024em
+    transition: color .24s linear
+
+    for $_layout, $i in $pageLayout.screens
+      @media all and (min-width: getMQWidth($i))
+        font-size: px2em($articleFigure.fontSize[$i])
+        line-height: round(operate('/', $articleFigure.lineHeight[$i], $articleFigure.fontSize[$i]), 3)
+
+    .{$pageRootClassName}_theme_dark &
+      color: $articleFigure.textColor.dark
+
+  &__image
+    margin: auto
+    max-width: 100%
+    height: auto
+    text-align: center
+    opacity: 0
+    visibility: hidden
+    transform: scale(1.1)
+    transition: all .24s ease
+
+    ^[0]__picture_state_loading &
+    ^[0]__picture_state_error &
+      position: absolute
+
+    ^[0]__picture_state_loaded &
+      opacity: 1
+      visibility: visible
+      transform: scale(1)
+
+  &__caption
+    margin: px2rem($articleFigure.captionMarginTop[$pageLayout.default]) 0 0
+    font-style: italic
+    text-align: left
+
+    for $_layout, $i in $pageLayout.screens
+      @media all and (min-width: getMQWidth($i))
+        margin-top: px2rem($articleFigure.captionMarginTop[$i])
+
+
+@keyframes loadingFigureImage
+  0%
+    transform: scale(2) translate(0%, 0%) rotate(135deg)
+
+  100%
+    transform: scale(2) translate(200%, 200%) rotate(135deg)

@@ -1,0 +1,3 @@
+mixin articleTitle($size = 'h1', $label = '')
+    #{$size}.articleTitle(class=`articleTitle_size_${$size}`, itemprop="headline")&attributes(attributes)
+        span.articleTitle__label!= $label

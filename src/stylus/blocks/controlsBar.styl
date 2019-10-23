@@ -1,0 +1,27 @@
+// Page controls bar
+
+.controlsBar
+  box-sizing: border-box
+  position: fixed
+  bottom: 0
+  left: 0
+  z-index: 2
+  display: block
+  width: 100%
+  padding: 1em
+  margin: 0
+  visibility: hidden
+
+  &__body
+    box-sizing: border-box
+    position: relative
+    display: block
+    width: 100%
+    max-width: px2em(288)
+    height: 3em
+    padding: 0
+    margin: 0 auto
+    border-radius: unit(@height / 2, em)
+    box-shadow: 0 .125em .5em rgba(0, 0, 0, .12)
+    background-color: #fff
+    visibility: visible

@@ -4,130 +4,183 @@ $font = {
   variant: normal,
   weight: 400,
   size: 12pt,
-  height: 1,
-  family: "'Source Sans Pro', Arial, Helvetica, sans-serif"
+  height: 1.25,
+  // family: "'Scada', Arial, Helvetica, sans-serif"
+  family: "'Open Sans', Verdana, Geneva, sans-serif",
 }
 
-// Base em size
-$em = 16
+// Page base classname
+$pageRootClassName = 'page'
 
 // Num columns in responsive layout grid
-$grid = 12
+// $grid = 12
 
-$colors = {
-  primary: #b61414,
-  header: #1e1e23,
-  nav: #2b2b33
-}
-
-// Navigation drawer sizes
-// $nav = 240
-$nav = {
-  width: {
-    mobile: 288,
-    desktop: 240
-  },
-  height: 40
-}
-
-// Page header height
-$header = {
-  height: {
-    mobile: 48,
-    desktop: 64
-  },
-  zIndex: 5,
-  bgColor: #1e1e23
-}
-
-
-// Break points for responsive layout
-$layoutBreakpoints = 288 432 576 720 864 1008 1152 1296 1440
-
-// Layout left/right margin
-$layoutBreakpointsMarginSmall = 0
-$layoutBreakpointsMarginBig = 48
-
-// Layout grid gap 24px start with break point element
-$layoutGapStart = 2
-$layoutGaps = {
-  '0': 24,
-  '2': 24,
-  '4': 24,
-  '8': 24
-}
-// $layoutGaps = (0 6) (2 12) (4 18) (8 24)
-$layoutGapDefault = $layoutGaps['0']
-
-// Layout stepped start with break point element
-$layoutFixedStart = 4
-
-// Layout start biggest screen
-$layoutBigStart = length($layoutBreakpoints) - 1
-
-
-$layout = {
-  fixed: false,
-  width: 0,
-  margin: 6,
-  gap: 12,
-  safe: 0
-}, {
-  fixed: false,
-  width: 864,
-  margin: 12,
-  gap: 24,
-  safe: 0
-}, {
-  fixed: false,
-  width: 1008,
-  margin: 12,
-  gap: 24,
-  safe: 24
-}, {
-  fixed: false,
-  width: 1152,
-  margin: 12,
-  gap: 24,
-  safe: 24
-}, {
-  fixed: true,
-  width: 1296,
-  margin: 12,
-  gap: 24,
-  safe: 24
-}
-
-// Screen sizes
-$screens = {
-  // xs: 288,
-  // sm: 576,
-  // md: 781,
-  // lg: 1201,
-  xs: 288+24,
-  sm: 576,
-  md: 864,
-  lg: 1152,
-}
-
-$spaces = {
-  gap: {
-    mobile: 12,
-    desktop: 24
-  },
-  margin: {
-    mobile: 6,
-    desktop: 12
-  },
-  safe: {
-    mobile: 0,
-    desktop: 24
+// Page layout options
+$pageLayout = {
+  screens: 0 288 360 432 1296,
+  default: 3,
+  maxWidth: 720 720 720 720 864,
+  marginSafe: 12 12 12 12 24,
+  marginPage: 0 6 12 18 24,
+  bgColor: {
+    light: #fff,
+    // light: #fafafa,
+    dark: #121212,
+    // dark: #001f3f,
+    // dark: #1b2120,
+    // dark: #1b2225,
   }
 }
 
-$breakpoints = 864 1008 1152 1296 1440
-// $breakpoints = (1200 - 48)
+// Article header options
+$articleHeader = {
+  marginTop: 32 48 64 96 128,
+}
 
-$layoutWidth = 100%
+// Article header options
+$articleMain = {
+  // marginTop: 8 12 16 24 32,
+  marginTop: 0 0 0 0 0,
+}
 
-$contentMaxWidth = 1224
+// Title component options
+$articleTitle = {
+  sizes: {
+    h1: {
+      fontSize: 21 24 30 36 48,
+      lineHeight: 28 36 44 52 60,
+      // fontSize: 24 30 36 48 60,
+      // lineHeight: 36 44 52 60 68,
+    },
+    h2: {
+      fontSize: 18 21 24 27 30,
+      // fontSize: 16 18 21 24 27,
+      lineHeight: 28 32 36 40 44,
+      // lineHeight: 24 28 32 36 40,
+    },
+  },
+  // fontFamily: "'Scada', Arial, Helvetica, sans-serif",
+  fontFamily: "'Open Sans', Verdana, Geneva, sans-serif",
+  textColor: {
+    light: rgba(0, 0, 0, .88),
+    dark: rgba(255, 255, 255, .88),
+  },
+}
+
+// Info options
+$articleInfo = {
+  fontSize: 10 11 12 14 16,
+  lineHeight: 16 16 20 20 24,
+  // fontFamily: "'Scada', Arial, Helvetica, sans-serif",
+  fontFamily: "'Open Sans', Verdana, Geneva, sans-serif",
+  textColor: {
+    light: rgba(0, 0, 0, .48),
+    dark: rgba(255, 255, 255, .48),
+  },
+  marginTop: 16 16 16 20 24,
+}
+
+// Article section options
+$articleSection = {
+  marginTop: 28 32 36 40 44,
+}
+
+// Article paragraph options
+$articleParagraph = {
+  // fontWeight: 400,
+  fontWeight: 300,
+  fontSize: 14 16 16 17.9 21,
+  // fontSize: 14 16 18 21 24,
+  lineHeight: 28 32 32 36 40,
+  // lineHeight: 28 32 36 40 44,
+  // fontFamily: "'Lora', Georgia, serif",
+  fontFamily: "'Merriweather', Georgia, serif",
+  // fontFamily: "'PT Serif', Georgia, serif",
+  textColor: {
+    light: rgba(0, 0, 0, .88),
+    dark: rgba(255, 255, 255, .88),
+    // light: #001f3f,
+    // dark: #fff,
+  },
+  // textAlign: justify,
+  textAlign: left,
+  phraseMark: {
+    padding: 2 3 3 4 4,
+    borderRadius: 2 2 2 3 3,
+    margin: -1 -1 -1 -2 -3,
+  }
+}
+
+// Figure options
+$articleFigure = {
+  fontSize: 11 12 14 16 18,
+  lineHeight: 16 16 20 20 24,
+  // fontFamily: "'Scada', Arial, Helvetica, sans-serif",
+  fontFamily: "'Open Sans', Verdana, Geneva, sans-serif",
+  textColor: {
+    light: rgba(0, 0, 0, .64),
+    dark: rgba(255, 255, 255, .64),
+  },
+  pictureBorderRadius: 2 2 3 3 3,
+  captionMarginTop: 4 4 8 12 12,
+}
+
+// Subtitle options
+$subtitle = {
+  fontSize: 18 21 24 27 30,
+  // fontSize: 16 18 21 24 27,
+  lineHeight: 28 32 36 40 44,
+  // lineHeight: 24 28 32 36 40,
+  marginTop: 8 12 12 16 16,
+  // fontFamily: "'Scada', Arial, Helvetica, sans-serif",
+  fontFamily: "'Open Sans', Verdana, Geneva, sans-serif",
+  textColor: {
+    light: rgba(0, 0, 0, .88),
+    dark: rgba(255, 255, 255, .88),
+  }
+}
+
+// Sides options
+$side = {
+  width: {
+    small: 80,
+    big: 120
+  }
+  // minWidth: 160
+  // maxWidth: 160
+  // fontSize: 18 21 24 27 30,
+  // // fontSize: 16 18 21 24 27,
+  // lineHeight: 28 32 36 40 44,
+  // // lineHeight: 24 28 32 36 40,
+  // marginTop: 8 12 12 16 16,
+  // fontFamily: "'Scada', Arial, Helvetica, sans-serif",
+  // textColor: {
+  //   light: rgba(0, 0, 0, .88),
+  //   dark: rgba(255, 255, 255, .88),
+  // }
+}
+
+$unscrollButton = {
+  width: {
+    small: 80,
+    big: 120
+  }
+}
+
+$themeToggleButton = {
+  position: bottom,
+  margin: {
+    small: 16,
+    big: 32
+  },
+  size: {
+    small: 48,
+    big: 64
+  },
+  icon: {
+    size: {
+      small: 24,
+      big: 36,
+    }
+  }
+}

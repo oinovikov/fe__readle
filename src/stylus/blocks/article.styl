@@ -1,0 +1,399 @@
+// Article page
+
+  &__header
+  &__main
+  &__footer
+  &__title
+  &__info
+  &__date
+  &__author
+  &__paragraph
+  &__figure
+  &__picture
+  &__image
+  &__figureCaption
+  &__subtitle
+    position: relative
+    z-index: 1
+    display: block
+    padding: 0
+    margin: 0
+
+  &__header
+  &__main
+  &__footer
+    width: auto
+    max-width: px2em($pageLayout.maxWidth[$pageLayout.default] - $pageLayout.marginSafe[$pageLayout.default] * 2)
+    padding: 0 px2em($pageLayout.marginSafe[$pageLayout.default] + $pageLayout.marginPage[$pageLayout.default])
+    margin: 0 auto
+
+    for $_layout, $i in $pageLayout.screens
+      @media all and (min-width: getMQWidth($i))
+        max-width: px2em($pageLayout.maxWidth[$i] - $pageLayout.marginSafe[$i] * 2)
+        padding: 0 px2em($pageLayout.marginSafe[$i] + $pageLayout.marginPage[$i])
+
+  &__header
+    padding-top: px2em($title.marginTop[$pageLayout.default])
+    transition: transform .64s linear .16s, opacity .64s linear .16s
+
+    for $_layout, $i in $pageLayout.screens
+      @media all and (min-width: getMQWidth($i))
+        padding-top: px2em($title.marginTop[$i])
+
+    @media all and (max-height: px2em(432))
+      margin-top: px2em(-1 * 32)
+
+    @media all and (min-height: px2em(1080))
+      margin-top: px2em(32)
+
+    ^[0]_state_loading &
+      opacity: 0
+      // transform: translateY(-16px)
+
+  &__title
+    font: normal normal 700 s('1em/%s', px2em($title.lineHeight[$pageLayout.default])) unquote($title.fontFamily)
+    color: $title.textColor.light
+    transition: color .24s linear
+
+    ^[0]_theme_dark &
+      color: $title.textColor.dark
+
+    for $_layout, $i in $pageLayout.screens
+      @media all and (min-width: getMQWidth($i))
+        line-height: px2em($title.lineHeight[$i])
+
+    &Label
+      position: relative
+      display: inline
+      font-size: px2em($title.fontSize[$pageLayout.default])
+      letter-spacing: .0015em
+      vertical-align: top
+
+      for $_layout, $i in $pageLayout.screens
+        @media all and (min-width: getMQWidth($i))
+          font-size: px2em($title.fontSize[$i])
+
+  &__info
+    display: table
+    padding: px2em($articleInfo.marginVertical[$pageLayout.default]) 0 px2em($articleInfo.marginVertical[$pageLayout.default]) .125em
+    color: $articleInfo.textColor.light
+    transition: color .24s linear
+
+    ^[0]_theme_dark &
+      color: $articleInfo.textColor.dark
+
+    for $_layout, $i in $pageLayout.screens
+      @media all and (min-width: getMQWidth($i))
+        if $i == 0
+          display: block
+        if $i == $pageLayout.default
+          display: table
+        padding-top: px2em($articleInfo.marginVertical[$i])
+        padding-bottom: @padding-top
+
+    &::after
+      content: ''
+      position: relative
+      display: block
+      clear: both
+      user-select: none
+      pointer-events: none
+
+  &__date
+  &__author
+    display: table-cell
+    font: normal normal 400 s('1em/%s', px2em($articleInfo.lineHeight[$pageLayout.default])) unquote($articleInfo.fontFamily)
+
+    for $_layout, $i in $pageLayout.screens
+      @media all and (min-width: getMQWidth($i))
+        if $i == 0
+          display: block
+        else if $i == $pageLayout.default
+          display: table-cell
+        line-height: px2em($articleInfo.lineHeight[$i])
+
+  &__date
+    padding-right: .75em
+    white-space: nowrap
+
+    @media all and (min-width: getMQWidth(0))
+      padding-right: 0
+      white-space: normal
+
+    @media all and (min-width: getMQWidth($pageLayout.default))
+      padding-right: .75em
+      white-space: nowrap
+
+  &__author
+    padding-top: 0
+    padding-left: .75em
+
+    @media all and (min-width: getMQWidth(0))
+      padding-top: .25em
+      padding-left: 0
+
+    @media all and (min-width: getMQWidth($pageLayout.default))
+      padding-top: 0
+      padding-left: .75em
+
+    &::before
+      content: ''
+      position: absolute
+      top: px2em($articleInfo.lineHeight[$pageLayout.default] / 2)
+      left: -.125em
+      z-index: -1
+      display: none
+      width: .25em
+      height: @width
+      padding: 0
+      margin: -.125em 0 0
+      border-radius: 50%
+      background-color: #000
+      opacity: .24
+      transition: background-color .24s linear
+      user-select: none
+      pointer-events: none
+
+      ^[0]_theme_dark &
+        background-color: #fff
+
+      for $_layout, $i in $pageLayout.screens
+        @media all and (min-width: getMQWidth($i))
+          top: px2em($articleInfo.lineHeight[$i] / 2)
+          if $i == $pageLayout.default
+            display: block
+
+  &__datePublished
+  &__authorName
+    display: inline
+    letter-spacing: .001em
+    vertical-align: top
+
+    for $_layout, $i in $pageLayout.screens
+      @media all and (min-width: getMQWidth($i))
+        font-size: px2em($articleInfo.fontSize[$i])
+
+  &__paragraph
+  &__end
+    font: normal normal 400 s('1em/%s', px2em($articleParagraph.lineHeight[$pageLayout.default])) unquote($articleParagraph.fontFamily)
+
+    for $_layout, $i in $pageLayout.screens
+      @media all and (min-width: getMQWidth($i))
+        font-size: px2em($articleParagraph.fontSize[$i])
+        line-height: round(operate('/', $articleParagraph.lineHeight[$i], $articleParagraph.fontSize[$i]), 3)
+
+  &__paragraph
+  &__figure
+    margin-top: 1.5em
+    margin-top: px2rem($articleParagraph.lineHeight[$pageLayout.default] - 4)
+
+    for $_layout, $i in $pageLayout.screens
+      @media all and (min-width: getMQWidth($i))
+        margin-top: px2rem($articleParagraph.lineHeight[$i] - 4)
+
+  &__paragraph
+    color: $articleParagraph.textColor.light
+    letter-spacing: .002em
+    text-align: left
+
+    for $i in 1..20
+      &:nth-child({$i})
+        transition: color .24s linear 0s, opacity .64s linear s('%ds', .24 * ($i - 1) + .16), transform .64s linear s('%ds', .24 * ($i - 1) + .16)
+
+    ^[0]_theme_dark &
+      color: $articleParagraph.textColor.dark
+
+    ^[0]_state_loading &
+      opacity: 0
+      // transform: translateY(-16px)
+
+  &__image
+  &__figureCaption
+    font: normal normal 400 s('1em/%s', px2em($articleFigure.lineHeight[$pageLayout.default])) unquote($articleFigure.fontFamily)
+    color: $articleFigure.textColor.light
+    letter-spacing: .002em
+    transition: color .24s linear
+
+    ^[0]_theme_dark &
+      color: $articleFigure.textColor.dark
+
+    for $_layout, $i in $pageLayout.screens
+      @media all and (min-width: getMQWidth($i))
+        font-size: px2em($articleFigure.fontSize[$i])
+        line-height: round(operate('/', $articleFigure.lineHeight[$i], $articleFigure.fontSize[$i]), 3)
+
+  &__image
+    max-width: 100%
+    height: auto
+    margin: auto
+    text-align: center
+    opacity: 0
+    visibility: hidden
+    transform: scale(1.1)
+    transition: all .24s ease
+
+    ^[0]__picture_state_loading &
+      position: absolute
+
+    &_state_loaded
+      opacity: 1
+      visibility: visible
+      transform: scale(1)
+
+  &__figureCaption
+    margin-top: .5em
+    font-style: italic
+    text-align: left
+
+  &__picture
+    border-radius: .1875em
+    background: #f0f0f0
+    background: rgba(255, 255, 255, 0) linear-gradient(45deg, rgba(0, 255, 255, .4) 0%, rgba(0, 255, 0, .2) 100%) center no-repeat scroll
+    overflow: hidden
+    transition: opacity .24s linear
+
+    @media all and (min-width: getMQWidth(0))
+      border-radius: .125rem
+
+    @media all and (min-width: getMQWidth(2))
+      border-radius: .1875rem
+
+    ^[0]_theme_dark &
+      opacity: .64
+
+      &:hover
+      &:focus
+        opacity: 1
+
+    &_state_loading::after
+      content: ''
+      position: absolute
+      top: 0
+      left: -200%
+      z-index: -1
+      display: block
+      width: 200%
+      padding-top: 25%
+      background: rgba(0, 0, 0, 0) linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, .4) 50%, rgba(255, 255, 255, 0) 100%) left top repeat scroll
+      background-size: 100%
+      transform: scale(2) translate(0%, 0%) rotate(135deg)
+      animation: imageLoading 2s linear 0s infinite
+
+    &_state_loading::before
+      content: ''
+      position: relative
+      top: 0
+      left: 0
+      z-index: -1
+      display: block
+      padding: 25% 0
+
+    &_size_wide
+      border-radius: 0
+      margin: 0 px2em(-1 * ($pageLayout.marginSafe[$pageLayout.default] + $pageLayout.marginPage[$pageLayout.default]))
+
+      for $_layout, $i in $pageLayout.screens
+        @media all and (min-width: getMQWidth($i))
+          margin: 0 px2em(-1 * ($pageLayout.marginSafe[$i] + $pageLayout.marginPage[$i]))
+
+  &__end
+    color: rgba(0, 0, 0, .64)
+    letter-spacing: normal
+    text-align: center
+    transition: color .24s linear
+
+    ^[0]_theme_dark &
+      color: rgba(255, 255, 255, .64)
+
+  &__footer
+    padding: px2em($articleParagraph.lineHeight[$pageLayout.default] * 2) 0
+
+    for $_layout, $i in $pageLayout.screens
+      @media all and (min-width: getMQWidth($i))
+        padding: px2em($articleParagraph.lineHeight[$i] * 2) 0
+
+  &__phrase
+    position: relative
+    display: inline
+    vertical-align: baseline
+    overflow: visible
+
+    &_define_emphasized
+      font-style: italic
+
+    &_define_important
+      font-weight: 700
+      letter-spacing: .004em
+
+    // &_define_code
+
+    &_define_mark
+      padding: 0 .1875rem .125rem
+      border-radius: .1875rem
+      margin: 0 -.1875rem
+      // background-color: rgba(#adf, .4)
+      // background-color: #E1F5FE
+      background-color: #F9FBE7
+      color: $articleParagraph.textColor.light
+      transition: color .24s linear, background-color .24s linear
+
+      ^[0]_theme_dark &
+        color: $articleParagraph.textColor.dark
+        // background-color: rgba(#01579B, .4)
+        background-color: rgba(#827717, .4)
+
+      @media all and (min-width: getMQWidth(0))
+        padding: 0 .125rem .125rem
+        border-radius: .125rem
+        margin: 0 -.0625rem
+
+      @media all and (min-width: getMQWidth(2))
+        border-radius: .1875rem
+        margin: 0 -.125rem
+
+      @media all and (min-width: getMQWidth(3))
+        padding: 0 .1875rem .125rem
+        margin: 0 -.1875rem
+
+  &__subtitle
+    margin-top: 2em
+    margin-top: px2rem($subtitle.lineHeight[$pageLayout.default] + $subtitle.marginTop[$pageLayout.default])
+    font: normal normal 700 s('%s/%s', px2em($subtitle.fontSize[$pageLayout.default]), px2em($subtitle.lineHeight[$pageLayout.default])) unquote($subtitle.fontFamily)
+    color: $subtitle.textColor.light
+    transition: opacity .64s linear .16s
+
+    for $_layout, $i in $pageLayout.screens
+      @media all and (min-width: getMQWidth($i))
+        margin-top: px2rem($subtitle.lineHeight[$i] + $subtitle.marginTop[$i])
+        font-size: px2em($subtitle.fontSize[$i])
+        line-height: round(operate('/', $subtitle.lineHeight[$i], $subtitle.fontSize[$i]), 3)
+
+    ^[0]_state_loading &
+      opacity: 0
+
+    ^[0]_theme_dark &
+      color: $subtitle.textColor.dark
+
+    // & + ^[0]__paragraph
+    //   margin-top: 1em
+
+  &__shadows
+    position: fixed
+    top: 0
+    left: 0
+    z-index: 2
+    display: block
+    width: 100%
+    width: 100vw
+    height: 100%
+    padding: 0
+    margin: 0
+    visibility: hidden
+
+
+@keyframes imageLoading
+  0%
+    transform: scale(2) translate(0%, 0%) rotate(135deg)
+
+  100%
+    transform: scale(2) translate(200%, 200%) rotate(135deg)

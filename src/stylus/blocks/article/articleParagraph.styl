@@ -1,0 +1,69 @@
+// Article paragraph
+
+.articleParagraph
+  position: relative
+  display: block
+  padding: 0
+  margin: px2em($articleParagraph.lineHeight[$pageLayout.default] - 12) 0 0
+  font: normal normal $articleParagraph.fontWeight s('%s/%s', $font.size, px2em($articleParagraph.lineHeight[$pageLayout.default])) s($articleParagraph.fontFamily)
+  color: $articleParagraph.textColor.light
+  text-align: $articleParagraph.textAlign
+  cursor: default
+  transition: color .48s linear
+
+  for $_layout, $i in $pageLayout.screens
+    @media all and (min-width: getMQWidth($i))
+      margin-top: px2em($articleParagraph.lineHeight[$i] - 12)
+      line-height: px2em($articleParagraph.lineHeight[$i])
+
+  .{$pageRootClassName}_theme_dark &
+    color: $articleParagraph.textColor.dark
+
+  &__text
+    position: relative
+    display: inline-block
+    font-size: px2em($articleParagraph.fontSize[$pageLayout.default])
+    vertical-align: top
+    letter-spacing: .0016em
+
+    for $_layout, $i in $pageLayout.screens
+      @media all and (min-width: getMQWidth($i))
+        font-size: px2em($articleParagraph.fontSize[$i])
+
+  &__phrase
+    position: relative
+    display: inline
+    vertical-align: baseline
+
+    &_define_emphasized
+      font-style: italic
+
+    &_define_important
+      font-weight: 700
+      letter-spacing: .004em
+
+    // &_define_code
+
+    &_define_mark
+      padding: px2rem($articleParagraph.phraseMark.padding[$pageLayout.default])
+      border-radius: px2rem($articleParagraph.phraseMark.borderRadius[$pageLayout.default])
+      margin: 0 px2rem($articleParagraph.phraseMark.margin[$pageLayout.default])
+      background-color: rgba(yellow, .8)
+      // background-color: rgba(lighten(yellow, -20), .8)
+      // background-color: rgba(#adf, .4)
+      // background-color: #E1F5FE
+      // background-color: #F9FBE7
+      color: rgba($articleParagraph.textColor.light, 1)
+      transition: color .48s linear, background-color .48s linear
+
+      for $_layout, $i in $pageLayout.screens
+        @media all and (min-width: getMQWidth($i))
+          padding: px2rem($articleParagraph.phraseMark.padding[$i])
+          border-radius: px2rem($articleParagraph.phraseMark.borderRadius[$i])
+          margin: 0 px2rem($articleParagraph.phraseMark.margin[$i])
+
+      .{$pageRootClassName}_theme_dark &
+        color: rgba($articleParagraph.textColor.dark, 1)
+        background-color: rgba(lighten(yellow, -30), 1)
+        // background-color: rgba(#01579B, .4)
+        // background-color: rgba(#827717, .4)

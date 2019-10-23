@@ -1,0 +1,59 @@
+// Article title
+
+.articleTitle
+  position: relative
+  display: block
+  padding: 0
+  margin: 0
+  font: normal normal 700 s('%s/%s', $font.size, 1) s($articleTitle.fontFamily)
+  color: $articleTitle.textColor.light
+  transition: color .48s linear
+
+  .{$pageRootClassName}_theme_dark &
+    color: $articleTitle.textColor.dark
+
+  for $_titleSizeName, $_titleSizeOpts in $articleTitle.sizes
+    &_size_{$_titleSizeName}
+      line-height: px2em($_titleSizeOpts.lineHeight[$pageLayout.default])
+
+      for $_layout, $i in $pageLayout.screens
+        @media all and (min-width: getMQWidth($i))
+          line-height: px2em($_titleSizeOpts.lineHeight[$i])
+
+  &__label
+    position: relative
+    display: inline-block
+    letter-spacing: .0024em
+    vertical-align: top
+
+    for $_titleSizeName, $_titleSizeOpts in $articleTitle.sizes
+      ^[0]_size_{$_titleSizeName} > &
+        font-size: px2em($_titleSizeOpts.fontSize[$pageLayout.default])
+
+        for $_layout, $i in $pageLayout.screens
+          @media all and (min-width: getMQWidth($i))
+            font-size: px2em($_titleSizeOpts.fontSize[$i])
+
+
+
+  // &__subtitle
+  //   margin-top: 2em
+  //   margin-top: px2rem($subtitle.lineHeight[$pageLayout.default] + $subtitle.marginTop[$pageLayout.default])
+  //   font: normal normal 700 s('%s/%s', px2em($subtitle.fontSize[$pageLayout.default]), px2em($subtitle.lineHeight[$pageLayout.default])) unquote($subtitle.fontFamily)
+  //   color: $subtitle.textColor.light
+  //   transition: opacity .64s linear .16s
+
+  //   for $_layout, $i in $pageLayout.screens
+  //     @media all and (min-width: getMQWidth($i))
+  //       margin-top: px2rem($subtitle.lineHeight[$i] + $subtitle.marginTop[$i])
+  //       font-size: px2em($subtitle.fontSize[$i])
+  //       line-height: round(operate('/', $subtitle.lineHeight[$i], $subtitle.fontSize[$i]), 3)
+
+  //   ^[0]_state_loading &
+  //     opacity: 0
+
+  //   ^[0]_theme_dark &
+  //     color: $subtitle.textColor.dark
+
+    // & + ^[0]__paragraph
+    //   margin-top: 1em
