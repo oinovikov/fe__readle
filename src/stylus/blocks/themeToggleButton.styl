@@ -1,0 +1,122 @@
+// Theme toggle button
+
+/**
+ * Show button only if browser support CSS Media Queries
+ */
+.themeToggleButton
+  @extends $button
+  position: absolute
+  z-index: 1
+  {$themeToggleButton.position}: px2em($themeToggleButton.margin.big - ($themeToggleButton.size.big - $themeToggleButton.icon.size.big) / 2)
+  right: 0
+  z-index: 1
+  display: block
+  width: px2em($themeToggleButton.size.big)
+  height: @width
+  border-radius: 50%
+  opacity: 0
+  visibility: hidden
+  cursor: pointer
+  transition: all .16s linear
+  transform: translateY(4.25em)
+
+  @media all and (min-width: 0)
+    .article_state_loaded &
+      opacity: .4
+      visibility: visible
+      transform: translateY(0)
+
+  @media all and (min-width: getMQWidth(0))
+    bottom: px2em($themeToggleButton.margin.small)
+    right: @bottom
+    width: px2em($themeToggleButton.size.small)
+    height: @width
+
+  @media all and (min-width: getMQWidth($pageLayout.default))
+    right: px2em($themeToggleButton.margin.big - ($themeToggleButton.size.big - $themeToggleButton.icon.size.big) / 2)
+    bottom: @right
+    width: px2em($themeToggleButton.size.big)
+    height: @width
+
+  @media all and (min-width: px2em($pageLayout.maxWidth[$pageLayout.default] + $pageLayout.marginPage[$pageLayout.default] * 2 + $side.width.small * 2))
+    right: 0
+
+  @media all and (min-width: px2em(max(last($pageLayout.screens), last($pageLayout.maxWidth) + last($pageLayout.marginPage) * 2 + $unscrollButton.width.big * 2)))
+    // bottom: px2em(32 - (120 - 36) / 2)
+    // width: px2em(120)
+    // height: @width
+    // background: red
+
+  &:hover
+    opacity: .88
+
+    .article_theme_dark &
+      opacity: .64
+
+  &__icon
+    position: relative
+    display: block
+    width: px2em($themeToggleButton.icon.size.big)
+    height: @width
+    padding: 0
+    margin: px2em((80 - 36) / 2)
+
+    @media all and (min-width: getMQWidth(0))
+      width: px2em(24)
+      height: @width
+      margin: px2em((48 - 24) / 2)
+
+    @media all and (min-width: getMQWidth($pageLayout.default))
+      width: px2em(36)
+      height: @width
+      margin: px2em((80 - 36) / 2)
+
+    & .feather
+      position: relative
+      display: block
+      width: 100%
+      height: @width
+      padding: 0
+      margin: auto
+      opacity: 0
+      visibility: hidden
+      stroke: #0091ea
+      transition: all .16s linear
+
+      &.feather-moon
+        opacity: 1
+        visibility: visible
+
+      .article_theme_dark &
+        stroke: #e1f5fe
+        transform: translateY(-100%)
+
+        &.feather-moon
+          opacity: 0
+          visibility: hidden
+
+        &.feather-sun
+          opacity: 1
+          visibility: visible
+
+  &__animation
+    position: absolute
+    top: 0
+    left: 0
+    z-index: -1
+    display: block
+    width: 100%
+    height: 100%
+    padding: 0
+    border-radius: 50%
+    margin: 0
+    background-color: $pageLayout.bgColor.light
+    opacity: 1
+    visibility: visible
+    transition: all .36s linear
+    transform: scale(40)
+    user-select: none
+    pointer-events: none
+
+    .article_theme_dark &
+      transform: scale(0)

@@ -1,0 +1,29 @@
+// Shadows block
+
+.shadows
+  position: absolute
+  top: 0
+  left: 0
+  display: block
+  width: 100%
+  height: 100%
+  padding: 0
+  margin: 0
+  visibility: hidden
+
+  &__body
+    box-sizing: border-box
+    position: absolute
+    top: 0
+    z-index: 1
+    display: block
+    width: px2em(80)
+    height: 100%
+    padding: 0
+    margin: 0
+
+    &_side_left
+      left: 0
+
+    &_side_right
+      right: 0

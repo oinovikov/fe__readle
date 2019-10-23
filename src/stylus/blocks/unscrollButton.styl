@@ -1,0 +1,123 @@
+// Scroll To Top button
+
+.unscrollButton
+  @extends $button
+  position: fixed
+  top: 0
+  left: 0
+  display: block
+  width: px2em(120)
+  height: 100%
+  font-size: 1em
+  line-height: 2em
+  letter-spacing: .024em
+  text-transform: uppercase
+  opacity: 0
+  visibility: hidden
+  cursor: pointer
+  transition: opacity .24s linear, visibility .24s linear
+
+  &_state_show
+    opacity: .4
+    visibility: visible
+
+    .{$pageRootClassName}_theme_dark &
+      opacity: .24
+
+  @media all and (min-width: getMQWidth(0))
+    display: none
+
+  @media all and (min-width: px2em($pageLayout.maxWidth[$pageLayout.default] + $pageLayout.marginPage[$pageLayout.default] * 2 + $unscrollButton.width.small * 2))
+    display: block
+    width: px2em($unscrollButton.width.small)
+
+  @media all and (min-width: px2em(max(last($pageLayout.screens), last($pageLayout.maxWidth) + last($pageLayout.marginPage) * 2 + $unscrollButton.width.big * 2)))
+    width: px2em($unscrollButton.width.big)
+
+  &:hover
+    opacity: .88
+
+    .{$pageRootClassName}_theme_dark &
+      opacity: .64
+
+  &::before
+    content: ''
+    position: absolute
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
+    z-index: -1
+    background-color: #e1f5fe
+    opacity: 0
+    transition: opacity .24s linear, background-color .24s linear
+
+    .article_theme_dark &
+      background-color: #0091ea
+
+  &:hover::before
+    opacity: .2
+
+    .article_theme_dark &:hover::before
+      opacity: .08
+
+  &__icon
+    position: absolute
+    bottom: 2em
+    left: 0
+    display: block
+    width: 100%
+    height: 2.25em
+    padding: 0
+    margin: 0 auto
+    transition: transform .24s ease
+    transform: translateY(4.25em) rotate(0deg)
+
+    .{$pageRootClassName}_state_loaded ^[0]_state_show &
+      transform: translateY(0em) rotate(0deg)
+
+    .{$pageRootClassName}_state_loaded ^[0]_state_back &
+      transform: translateY(0em)// rotate(179.9deg)
+
+    // & .feather
+    //   position: relative
+    //   display: block
+    //   width: 2.25em
+    //   height: @width
+    //   padding: 0
+    //   margin: auto
+    //   stroke: #0091ea
+    //   transition: stroke .24s linear
+
+    //   .article_theme_dark &
+    //     stroke: #e1f5fe
+
+    & .feather
+      position: relative
+      display: block
+      width: 2.25em
+      height: @width
+      padding: 0
+      margin: auto
+      opacity: 0
+      visibility: hidden
+      stroke: #0091ea
+      transition: all .16s linear
+
+      &.feather-arrow-up-circle
+        opacity: 1
+        visibility: visible
+
+      ^[0]_state_back &
+        transform: translateY(-100%)
+
+      ^[0]_state_back &.feather-arrow-up-circle
+        opacity: 0
+        visibility: hidden
+
+      ^[0]_state_back &.feather-arrow-down-circle
+        opacity: 1
+        visibility: visible
+
+      .article_theme_dark &
+        stroke: #e1f5fe

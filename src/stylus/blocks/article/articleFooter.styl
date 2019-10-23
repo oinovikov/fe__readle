@@ -1,0 +1,10 @@
+// Article header
+
+.articleFooter
+  @extends $articleSemantics
+  padding: px2em($articleParagraph.lineHeight[$pageLayout.default] * 2) 0
+  transition: opacity .48s linear .72s, transform .48s linear .48s
+
+  for $_layout, $i in $pageLayout.screens
+    @media all and (min-width: getMQWidth($i))
+      padding: px2em($articleParagraph.lineHeight[$i] * 2) 0

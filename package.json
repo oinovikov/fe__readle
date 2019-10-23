@@ -1,10 +1,10 @@
 {
-  "name": "fe__template",
+  "name": "fe__readle_article",
   "version": "1.0.0",
-  "description": "My own template for front-end development",
+  "description": "Service for free and open publications.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/oinovikov/fe__template"
+    "url": "https://github.com/oinovikov/fe__readle_article"
   },
   "keywords": [
     "front-end",

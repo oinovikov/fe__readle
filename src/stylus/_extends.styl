@@ -3,37 +3,6 @@ $textNowrap
   white-space nowrap
   overflow hidden
 
-$icon
-  font-family 'Material Icons'
-  font-weight normal
-  font-style normal
-  line-height 1
-  text-transform none
-  letter-spacing normal
-  word-wrap normal
-  white-space nowrap
-  direction ltr
-  -webkit-font-smoothing antialiased
-  text-rendering optimizeLegibility
-  -moz-osx-font-smoothing grayscale
-  font-feature-settings 'liga'
-
-$icomoon
-  font-weight normal
-  font-style normal
-  font-size: $font.size * 1.5
-  font-family: 'icomoon'
-  line-height 1
-  text-transform none
-  letter-spacing normal
-  word-wrap normal
-  white-space nowrap
-  direction ltr
-  -webkit-font-smoothing antialiased
-  text-rendering optimizeLegibility
-  -moz-osx-font-smoothing grayscale
-  font-feature-settings 'liga'
-
 $button
   appearance: none
   box-sizing: content-box
@@ -64,3 +33,53 @@ $button
   opacity: 1
   user-select: none
   -webkit-tap-highlight-color: transparent
+
+$googleMaterialIcon
+  font-family 'Material Icons'
+  font-weight normal
+  font-style normal
+  line-height 1
+  text-transform none
+  letter-spacing normal
+  word-wrap normal
+  white-space nowrap
+  direction ltr
+  -webkit-font-smoothing antialiased
+  text-rendering optimizeLegibility
+  -moz-osx-font-smoothing grayscale
+  font-feature-settings 'liga'
+
+$articleSemantics
+  position: relative
+  display: block
+  padding: 0
+  margin: 0
+
+  &__body
+    position: relative
+    display: block
+    width: auto
+    max-width: px2em($pageLayout.maxWidth[$pageLayout.default] - $pageLayout.marginSafe[$pageLayout.default] * 2)
+    padding: 0 px2em($pageLayout.marginSafe[$pageLayout.default])
+    margin: 0 auto
+
+    for $_layout, $i in $pageLayout.screens
+      @media all and (min-width: getMQWidth($i))
+        max-width: px2em($pageLayout.maxWidth[$i] - $pageLayout.marginSafe[$i] * 2)
+        padding: 0 px2em($pageLayout.marginSafe[$i])
+
+  .{$pageRootClassName}_state_loading &
+  .{$pageRootClassName}_state_unloading &
+    opacity: 0
+    transition-delay: 0s
+    transition-duration: .24s
+
+  .{$pageRootClassName}_state_loading &
+    transform: translateY(-1em)
+
+  .{$pageRootClassName}_state_unloading &
+    transform: translateY(1em)
+
+  .{$pageRootClassName}_state_loaded &
+    opacity: 1
+    transform: translateY(0em)

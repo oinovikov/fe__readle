@@ -1,0 +1,12 @@
+header(class=`${$pageRootClassName}__section`)
+    div.articleHeader
+        div(class=`${$pageRootClassName}__layout`)
+            div.articleHeader__body
+                //- +articleTitle('h1', 'Действительный статский советник Козерогов, выйдя в отставку, купил себе небольшое имение и поселился в нем')
+                +articleTitle('h1', 'Пробный очерк')
+
+                div.articleInfo
+                    p.articleInfo__date
+                        time.articleInfo__label(itemprop="datePublished", datetime="2019-09-04") 4 сентября 2019
+                    address.articleInfo__author(itemprop="author", itemscope, itemtype="http://schema.org/Person")
+                        span.articleInfo__label(itemprop="name") Константин Константинопольский

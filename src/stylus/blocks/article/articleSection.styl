@@ -1,0 +1,12 @@
+// Article section
+
+.articleSection
+  position: relative
+  display: block
+  padding: 0
+  margin: 0
+  margin: px2em($articleSection.marginTop[$pageLayout.default]) 0 0
+
+  for $_layout, $i in $pageLayout.screens
+    @media all and (min-width: getMQWidth($i))
+      margin-top: px2em($articleSection.marginTop[$i])

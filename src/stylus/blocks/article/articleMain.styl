@@ -1,0 +1,10 @@
+// Article main body
+
+.articleMain
+  @extends $articleSemantics
+  padding-top: px2em($articleMain.marginTop[$pageLayout.default])
+  transition: opacity .48s linear .48s, transform .48s linear .24s
+
+  for $_layout, $i in $pageLayout.screens
+    @media all and (min-width: getMQWidth($i))
+      padding-top: px2em($articleMain.marginTop[$i])
